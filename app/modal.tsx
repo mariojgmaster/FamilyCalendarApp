@@ -1,35 +1,66 @@
+/**
+	* @description      : 
+	* @author           : mario
+	* @group            : 
+	* @created          : 13/03/2024 - 22:25:51
+	* 
+	* MODIFICATION LOG
+	* - Version         : 1.0.0
+	* - Date            : 13/03/2024
+	* - Author          : mario
+	* - Modification    : 
+**/
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import { Alert, Dimensions, Modal, Platform, StyleSheet, TouchableHighlight } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
+import { useState } from 'react';
 
-export default function ModalScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/modal.tsx" />
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-    </View>
-  );
+export default function ModalScreen({ isModalVisible }: { isModalVisible: Boolean }) {
+	const [modalVisible, setModalVisible] = useState(isModalVisible);
+
+	return (
+		isModalVisible && (
+			<Modal
+				animationType="slide"
+				transparent={false}
+				visible={modalVisible}
+				onRequestClose={() => {
+					Alert.alert('Modal foi fechado.');
+				}}>
+				<View style={{ marginTop: 22 }}>
+					<View>
+						<Text>Olá Mundo!</Text>
+
+						<TouchableHighlight
+							onPress={() => {
+								setModalVisible(!modalVisible);
+							}}>
+							<Text>Esconder Modal</Text>
+						</TouchableHighlight>
+					</View>
+				</View>
+			</Modal>
+		)
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	title: {
+		fontSize: 20,
+		fontWeight: 'bold',
+	},
+	separator: {
+		marginVertical: 30,
+		height: 1,
+		width: '80%',
+	},
 });

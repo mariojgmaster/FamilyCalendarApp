@@ -1,3 +1,15 @@
+/**
+    * @description      : 
+    * @author           : mario
+    * @group            : 
+    * @created          : 06/03/2024 - 19:32:33
+    * 
+    * MODIFICATION LOG
+    * - Version         : 1.0.0
+    * - Date            : 06/03/2024
+    * - Author          : mario
+    * - Modification    : 
+**/
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
