@@ -92,22 +92,25 @@ export default function HomeScreen() {
 				title: 'Lembrar de tal coisa',
 				description: 'Description of a thing.',
 				createdAt: formatedDate,
-				category: 'Tarefa'
 			},
 			{
 				id: 1,
 				title: 'Fazer tal coisa',
 				description: 'Description of another thing.',
 				createdAt: formatedDate,
-				category: 'Evento'
 			},
 		]);
 	}, [formatedDate, setFormatedDate]);
 
 	return (
 		<View style={styles.container}>
-			<Tasks title='O que tem para Hoje' tasks={tasks} />
-			<Tasks title='Notas' notes={notes} />
+			<View style={{ flex: 3 }}>
+				<Tasks title='O que tem para Hoje' tasks={tasks} />
+			</View>
+
+			<View style={{ flex: 2 }}>
+				<Tasks title='Notas' notes={notes} />
+			</View>
 		</View>
 	);
 }

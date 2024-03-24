@@ -16,7 +16,7 @@ type Note = {
     id?: Key | null | undefined;
     title: string;
     description: string;
-    category: string;
+    // category: string;
     createdAt?: string;
 }
 

@@ -18,8 +18,9 @@ import Note from '@/constants/types/Note';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import TextTruncateProps from '@/constants/types/TextTruncate';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import generateRandomNumber from './generateRandomNumber';
+import Fontisto from '@expo/vector-icons/Fontisto';
+import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
+// import generateRandomNumber from './generateRandomNumber';
 
 interface Tasks {
     title: string,
@@ -28,10 +29,19 @@ interface Tasks {
 }
 
 function TaskIcon(props: {
-    name: React.ComponentProps<typeof AntDesign>['name'];
+    name: React.ComponentProps<typeof Fontisto>['name'];
     color: string;
+    size: number;
 }) {
-    return <AntDesign size={18} style={{ marginBottom: -3 }} {...props} />;
+    return <Fontisto style={{ marginBottom: -3 }} {...props} />;
+}
+
+function NoteIcon(props: {
+    name: React.ComponentProps<typeof SimpleLineIcons>['name'];
+    color: string;
+    size: number;
+}) {
+    return <SimpleLineIcons style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function Tasks({ title, tasks, notes }: Tasks) {
@@ -60,10 +70,11 @@ export default function Tasks({ title, tasks, notes }: Tasks) {
                         renderItem={({ item: task, index }) => (
                             <View style={{ marginBottom: 15, backgroundColor: '#f3f0c622', borderRadius: 10, flexDirection: 'row' }}>
                                 <View style={{ flex: 11, paddingVertical: 8, paddingHorizontal: 14, backgroundColor: 'transparent', flexDirection: 'column', borderRadius: 20 }}>
-                                    <View style={{ alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row', backgroundColor: 'transparent' }}>
+                                    <View style={{ alignItems: 'baseline', justifyContent: 'flex-start', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 5 }}>
                                         <TaskIcon
-                                            name='clockcircleo'
+                                            name='date'
                                             color='rgba(255, 255, 255, .5)'
+                                            size={20}
                                         />
                                         <Text style={[styles.taskDate, { marginLeft: 10 }]}>{task.createdAt}</Text>
                                     </View>
@@ -82,20 +93,6 @@ export default function Tasks({ title, tasks, notes }: Tasks) {
                                     <Text style={{ fontSize: 12, fontWeight: 'bold', textAlign: 'center' }}>{task.status}</Text>
                                 </View>
                             </View>
-
-                            // <View style={styles.taskContent}>
-                            //     <Text numberOfLines={textTruncate.numberOfLinesTitle} ellipsizeMode={textTruncate.ellipsizeMode} style={styles.taskTitle}>{task.title}</Text>
-
-                            //     <Text numberOfLines={textTruncate.numberOfLinesText} ellipsizeMode={textTruncate.ellipsizeMode} style={styles.taskDescription}>{task.description}</Text>
-
-                            //     <View style={styles.taskTagContainer}>
-                            //         <Text style={styles.taskDate}>{task.createdAt}</Text>
-
-                            //         <View style={styles.taskTag}>
-                            //             <Text style={styles.taskSmallText}>{task.type}</Text>
-                            //         </View>
-                            //     </View>
-                            // </View>
                         )}
                     />
                 )
@@ -108,17 +105,15 @@ export default function Tasks({ title, tasks, notes }: Tasks) {
                         data={notes}
                         renderItem={({ item: task }) => (
                             <View style={styles.taskContent}>
-                                <Text numberOfLines={textTruncate.numberOfLinesTitle} ellipsizeMode={textTruncate.ellipsizeMode} style={styles.taskTitle}>{task.title}</Text>
-
-                                <Text numberOfLines={textTruncate.numberOfLinesText} ellipsizeMode={textTruncate.ellipsizeMode} style={styles.taskDescription}>{task.description}</Text>
-
-                                <View style={styles.taskTagContainer}>
-                                    <Text style={styles.taskDate}>{task.createdAt}</Text>
-
-                                    <View style={styles.taskTag}>
-                                        <Text style={styles.taskSmallText}>{task.category}</Text>
-                                    </View>
+                                <View style={{ alignItems: 'baseline', justifyContent: 'flex-start', flexDirection: 'row', backgroundColor: 'transparent', marginBottom: 5 }}>
+                                    <NoteIcon
+                                        name='note'
+                                        color='rgba(255, 255, 255, .5)'
+                                        size={24}
+                                    />
+                                    <Text numberOfLines={textTruncate.numberOfLinesTitle} ellipsizeMode={textTruncate.ellipsizeMode} style={[styles.taskTitle, { marginLeft: 10 }]}>{task.title}</Text>
                                 </View>
+                                <Text numberOfLines={textTruncate.numberOfLinesText} ellipsizeMode={textTruncate.ellipsizeMode} style={styles.taskDescription}>{task.description}</Text>
                             </View>
                         )}
                     />
